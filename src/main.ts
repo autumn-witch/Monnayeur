@@ -1,24 +1,20 @@
-import './style.css'
-import typescriptLogo from './typescript.svg'
-import viteLogo from '/vite.svg'
-import { setupCounter } from './counter.ts'
+import { setBillsArray, displayBills } from "./coinMaker";
 
 document.querySelector<HTMLDivElement>('#app')!.innerHTML = `
-  <div>
-    <a href="https://vitejs.dev" target="_blank">
-      <img src="${viteLogo}" class="logo" alt="Vite logo" />
-    </a>
-    <a href="https://www.typescriptlang.org/" target="_blank">
-      <img src="${typescriptLogo}" class="logo vanilla" alt="TypeScript logo" />
-    </a>
-    <h1>Vite + TypeScript</h1>
-    <div class="card">
-      <button id="counter" type="button"></button>
-    </div>
-    <p class="read-the-docs">
-      Click on the Vite and TypeScript logos to learn more
-    </p>
-  </div>
+<div>
+<label for="bill">Saisissez le montant que vous souhaitez échanger:</label>
+  <input type="number" id="bill" name="bill"/>
+  <div id="displayed-value"></div>
+</div>
 `
 
-setupCounter(document.querySelector<HTMLButtonElement>('#counter')!)
+const inputElement = document.querySelector('#bill')!;
+
+const displayedValueElement = document.querySelector('#displayed-value')!;
+
+inputElement.addEventListener('input', (event: Event) => {
+  const target = (event as InputEvent).target as any;
+  const value = Number(target!.value);
+  const billetsARendre = setBillsArray(value);
+  displayedValueElement.textContent = displayBills(billetsARendre);
+})
