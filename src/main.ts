@@ -15,6 +15,6 @@ const displayedValueElement = document.querySelector('#displayed-value')!;
 inputElement.addEventListener('input', (event: Event) => {
   const target = (event as InputEvent).target as any;
   const value = Number(target!.value);
-  const billetsARendre = setBillsArray(value);
-  displayedValueElement.textContent = displayBills(billetsARendre);
+  const billsArray = setBillsArray(value);
+  displayedValueElement.textContent = displayBills(billsArray);
 })
